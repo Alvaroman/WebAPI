@@ -28,6 +28,7 @@ namespace FooBar.Infrastructure.Context
             }
 
             modelBuilder.HasDefaultSchema(_config.GetValue<string>("SchemaName"));
+            modelBuilder.Entity<ParkingLot>();
             modelBuilder.Entity<Person>();
 
 
@@ -36,6 +37,7 @@ namespace FooBar.Infrastructure.Context
                 var t = entityType.ClrType;
                 if (typeof(DomainEntity).IsAssignableFrom(t))
                 {
+                    modelBuilder.Entity(entityType.Name).Property<Guid>("Id").HasDefaultValueSql("NEWID()");
                     modelBuilder.Entity(entityType.Name).Property<DateTime>("CreatedOn").HasDefaultValueSql("GETDATE()");
                     modelBuilder.Entity(entityType.Name).Property<DateTime>("LastModifiedOn").HasDefaultValueSql("GETDATE()");
                 }

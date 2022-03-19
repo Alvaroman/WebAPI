@@ -1,0 +1,12 @@
+﻿using FooBar.Application.Person.Queries;
+using MediatR;
+using System.ComponentModel.DataAnnotations;
+
+namespace FooBar.Application.Person.Commands
+{
+    public record ParkingLotCreateCommand([Required] int VehicleType,
+        [Required] string Plate,
+        [Required] DateTime StartAt,
+        [Required] int Cylinder
+    ) : IRequest;
+}
