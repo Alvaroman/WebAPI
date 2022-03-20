@@ -10,9 +10,14 @@ namespace FooBar.Domain.Services.ParkingPicoPlacaState
     {
         public override bool PicoPlacaValidator(string plate)
         {
-            int[] currentRestrictions = { PICO_Y_PLACA_DAYS[(int)DateTime.Today.DayOfWeek, 0], PICO_Y_PLACA_DAYS[(int)DateTime.Today.DayOfWeek, 1] };
-            int numberToValidate = Convert.ToInt16(plate.Last());
-            return !currentRestrictions.Contains(numberToValidate);
+            if (DateTime.Now.Hour > INITIAL_HOUR && DateTime.Now.Hour < FINAL_HOUR)
+            {
+                int[] currentRestrictions = { PICO_Y_PLACA_DAYS[(int)DateTime.Today.DayOfWeek, 0], PICO_Y_PLACA_DAYS[(int)DateTime.Today.DayOfWeek, 1] };
+                int numberToValidate = Convert.ToInt16(plate.Last());
+                return !currentRestrictions.Contains(numberToValidate);
+            }
+            else
+                return true;
         }
     }
 }
