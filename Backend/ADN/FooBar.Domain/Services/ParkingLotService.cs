@@ -38,7 +38,7 @@ namespace FooBar.Domain.Services
                 if (vehiclesInUse.Count() < maxCapacity)
                     return await _repository.AddAsync(parkingLot);
                 else
-                    throw new FullCapacityException("There is not capacity available for this type of vehicle");
+                    throw new FullCapacityException("There is no space available for this vehicle type");
             }
             else
                 return await _repository.AddAsync(parkingLot);
@@ -47,12 +47,15 @@ namespace FooBar.Domain.Services
         public async Task<decimal> ReleaseParkingLotAsync(Guid id)
         {
             var model = await _repository.GetByIdAsync(id);
+            if (model == null || !model.Status)
+            {
+                throw new NonExistentVehicle("This vehicle is not in the parking lot");
+            }
             model.FinishedAt = DateTime.Now;
             model.Status = false;
-
+            decimal cost = _chargerContext.CalculateCharge((model.FinishedAt.Value - model.StartedAt).Hours, model.Cylinder, (VehicleType)model.VehicleType);
             await _repository.UpdateAsync(model);
-            return _chargerContext.CalculateCharge((model.FinishedAt.Value - model.StartedAt).Hours, model.Cylinder, (VehicleType)model.VehicleType);
+            return cost;
         }
     }
 }
-dding 

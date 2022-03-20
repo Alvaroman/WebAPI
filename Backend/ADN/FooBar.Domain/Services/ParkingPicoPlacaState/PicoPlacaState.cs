@@ -8,7 +8,7 @@ namespace FooBar.Domain.Services.ParkingPicoPlacaState
 {
     public abstract class PicoPlacaState
     {
-        protected int[,] Days = new int[5, 2] { { 6, 9 }, { 2, 3 }, { 4, 8 }, { 0, 7 }, { 5, 1 } };
+        protected int[,] Days = new int[7, 2] { { -1, -1 }, { 6, 9 }, { 2, 3 }, { 4, 8 }, { 0, 7 }, { 5, 1 }, { -1, -1 } };
         public abstract bool PicoPlacaValidator(string plate);
     }
 }
