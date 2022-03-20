@@ -12,17 +12,24 @@ namespace FooBar.Domain.Services.ParkingChargerState
         protected abstract decimal DayCharge { get; set; }
         public virtual decimal Calculate(int spentHours)
         {
-            if (spentHours < 9 || spentHours % 24 < 1)
+            if (spentHours < 9)
                 return spentHours * HourCharge;
             else
             {
-                decimal timeCharge = 0;
-                do
+                if (spentHours % 24 <= 1)
                 {
-                    timeCharge += DayCharge;
-                    spentHours -= 24;
-                } while (spentHours % 24 > 1);
-                return timeCharge + spentHours * HourCharge;
+                    return DayCharge;
+                }
+                else
+                {
+                    decimal timeCharge = 0;
+                    do
+                    {
+                        timeCharge += DayCharge;
+                        spentHours -= 24;
+                    } while (spentHours % 24 > 1);
+                    return timeCharge + spentHours * HourCharge;
+                }
             }
         }
     }

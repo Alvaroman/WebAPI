@@ -11,10 +11,14 @@ namespace FooBar.Domain.Services
     public class ParkingLotService
     {
         readonly IGenericRepository<ParkingLot> _repository;
-        public ParkingLotService(IGenericRepository<ParkingLot> repository)
+        private readonly ChargerContext _chargerContext;
+
+        public ParkingLotService(IGenericRepository<ParkingLot> repository, ChargerContext chargerContext)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository), "No repo available");
+            this._repository = repository ?? throw new ArgumentNullException(nameof(repository), "No repo available");
+            this._chargerContext = chargerContext;
         }
+
 
         public async Task<ParkingLot> RegisterParkingLotAsync(ParkingLot parkingLot)
         {
@@ -26,20 +30,15 @@ namespace FooBar.Domain.Services
 
             return await _repository.AddAsync(parkingLot);
         }
+
         public async Task<decimal> ReleaseParkingLotAsync(Guid id)
         {
             var model = await _repository.GetByIdAsync(id);
             model.FinishedAt = DateTime.Now;
             model.Status = false;
+
             await _repository.UpdateAsync(model);
-            ChargerContext chargetContext = new ChargerContext();
-            chargetContext.State = model.VehicleType switch
-            {
-                (int)VehicleType.Car => new CarCharger(),
-                (int)VehicleType.Motorcycle => new MotorcycleCharger(),
-                _ => throw new VehicleNotAllowed("You must register a valid vehicle type")
-            };
-            return chargetContext.CalculateCharge((model.FinishedAt.Value - model.StartedAt).Hours);
+            return _chargerContext.CalculateCharge((model.FinishedAt.Value - model.StartedAt).Hours, (VehicleType)model.VehicleType);
         }
     }
 }

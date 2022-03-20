@@ -4,7 +4,7 @@
     {
         protected override decimal HourCharge { get; set; } = 500;
         protected override decimal DayCharge { get; set; } = 4000;
-        private decimal CylinderOverCharge = 2000;
+        private readonly decimal CylinderOverCharge = 2000;
 
         public override decimal Calculate(int spentHours) => base.Calculate(spentHours) + CylinderOverCharge;
 
