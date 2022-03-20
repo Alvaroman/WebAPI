@@ -8,5 +8,6 @@
         public int Cylinder { get; set; }
         public DateTime StartAt { get; set; } = default!;
         public DateTime FinishedAt { get; set; } = default!;
+        public bool Status { get; set; } = default!;
     }
 }

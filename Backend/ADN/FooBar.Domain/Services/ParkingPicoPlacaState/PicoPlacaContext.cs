@@ -11,7 +11,7 @@ namespace FooBar.Domain.Services.ParkingPicoPlacaState
     [DomainService]
     public class PicoPlacaContext
     {
-        private PicoPlacaState State { get; set; }
+        private PicoPlacaState State { get; set; } = default!;
         public bool ValidatePicoPlaca(string plate, VehicleType vehicleType)
         {
             this.State = vehicleType switch

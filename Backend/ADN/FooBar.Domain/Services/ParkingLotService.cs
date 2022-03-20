@@ -53,7 +53,7 @@ namespace FooBar.Domain.Services
             }
             model.FinishedAt = DateTime.Now;
             model.Status = false;
-            decimal cost = _chargerContext.CalculateCharge((model.FinishedAt.Value - model.StartedAt).Hours, model.Cylinder, (VehicleType)model.VehicleType);
+            decimal cost = _chargerContext.CalculateCharge((int)Math.Truncate((model.FinishedAt.Value - model.StartedAt).TotalHours), model.Cylinder, (VehicleType)model.VehicleType);
             await _repository.UpdateAsync(model);
             return cost;
         }
