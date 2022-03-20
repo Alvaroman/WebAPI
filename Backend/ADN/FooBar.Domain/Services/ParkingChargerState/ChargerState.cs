@@ -1,36 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FooBar.Domain.Services.ParkingChargerState
+﻿namespace FooBar.Domain.Services.ParkingChargerState
 {
     public abstract class ChargerState
     {
         protected abstract decimal HourCharge { get; set; }
         protected abstract decimal DayCharge { get; set; }
-        public virtual decimal Calculate(int spentHours)
+        protected abstract bool CylinderRestriction { get; set; }
+        protected abstract decimal CylinderOverCharge { get; set; }
+        protected abstract decimal CylinderLimit { get; set; }
+
+        public virtual decimal Calculate(int spentHours, int cylinder)
         {
+            decimal charge = 0;
             if (spentHours < 9)
-                return spentHours * HourCharge;
+                charge = spentHours * HourCharge;
             else
             {
-                if (spentHours % 24 <= 1)
+                do
                 {
-                    return DayCharge;
-                }
-                else
-                {
-                    decimal timeCharge = 0;
-                    do
-                    {
-                        timeCharge += DayCharge;
-                        spentHours -= 24;
-                    } while (spentHours % 24 > 1);
-                    return timeCharge + spentHours * HourCharge;
-                }
+                    charge += DayCharge;
+                    spentHours -= 24;
+                } while (spentHours / 24 >= 1);
+                if (spentHours > 0)
+                    charge += spentHours * HourCharge;
+
             }
+            return !CylinderRestriction ? charge : charge + (cylinder >= CylinderLimit ? CylinderOverCharge : 0);
         }
     }
 }

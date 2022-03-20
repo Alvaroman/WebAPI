@@ -12,7 +12,7 @@ namespace FooBar.Domain.Services.ParkingChargerState
     public class ChargerContext
     {
         private ChargerState State { get; set; } = default!;
-        public decimal CalculateCharge(int spentHours, VehicleType vehicleType)
+        public decimal CalculateCharge(int spentHours, int cylinder, VehicleType vehicleType)
         {
             this.State = vehicleType switch
             {
@@ -20,7 +20,8 @@ namespace FooBar.Domain.Services.ParkingChargerState
                 VehicleType.Motorcycle => new MotorcycleCharger(),
                 _ => throw new VehicleNotAllowed("This vehicle type is not considered")
             };
-            return this.State.Calculate(spentHours);
+            return this.State.Calculate(spentHours, cylinder);
         }
     }
 }
+    
