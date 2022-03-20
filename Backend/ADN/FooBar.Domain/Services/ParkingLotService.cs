@@ -1,7 +1,9 @@
 ﻿using FooBar.Domain.Entities;
+using FooBar.Domain.Enums;
 using FooBar.Domain.Exception;
 using FooBar.Domain.Extentions;
 using FooBar.Domain.Ports;
+using FooBar.Domain.Services.ParkingChargerState;
 
 namespace FooBar.Domain.Services
 {
@@ -30,7 +32,14 @@ namespace FooBar.Domain.Services
             model.FinishedAt = DateTime.Now;
             model.Status = false;
             await _repository.UpdateAsync(model);
-            return 100;
+            ChargerContext chargetContext = new ChargerContext();
+            chargetContext.State = model.VehicleType switch
+            {
+                (int)VehicleType.Car => new CarCharger(),
+                (int)VehicleType.Motorcycle => new MotorcycleCharger(),
+                _ => throw new VehicleNotAllowed("You must register a valid vehicle type")
+            };
+            return chargetContext.CalculateCharge((model.FinishedAt.Value - model.StartedAt).Hours);
         }
     }
 }

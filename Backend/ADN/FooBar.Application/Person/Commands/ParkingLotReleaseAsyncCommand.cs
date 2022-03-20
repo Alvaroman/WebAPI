@@ -5,5 +5,5 @@ namespace FooBar.Application.Person.Commands
 {
     public record ParkingLotReleaseAsyncCommand(
         [Required] Guid id) 
-        : IRequest;
+        : IRequest<decimal>;
 }
