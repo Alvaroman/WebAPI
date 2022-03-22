@@ -29,8 +29,6 @@ namespace FooBar.Infrastructure.Context
 
             modelBuilder.HasDefaultSchema(_config.GetValue<string>("SchemaName"));
             modelBuilder.Entity<ParkingLot>();
-            modelBuilder.Entity<Person>();
-
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {

@@ -71,15 +71,13 @@ namespace FooBar.Domain.Tests.ParkingLot
         {
             try
             {
-                Domain.Entities.ParkingLot notAllowedVehicle = new()
-                {
-                    Cylinder = 1800,
-                    Plate = "abc-126",
-                    StartedAt = new System.DateTime(year: 2022, month: 03, day: 21),
-                    Status = false,
-                    VehicleType = 1
-                };
-                await _parkingLotService.RegisterParkingLotAsync(notAllowedVehicle);
+                FooBar.Domain.Entities.ParkingLot parkingLotNowAllowed = new ParkingLotDataBuilder()
+                  .WithCylinder(1800)
+                  .WithVehicleType(1)
+                  .WithStartAt(new System.DateTime(year: 2022, month: 03, day: 21))
+                  .WithPlate("abc-126")
+                  .WithStaus(false).Build();
+                await _parkingLotService.RegisterParkingLotAsync(parkingLotNowAllowed);
             }
             catch (System.Exception ex)
             {
@@ -89,22 +87,14 @@ namespace FooBar.Domain.Tests.ParkingLot
         [TestMethod]
         public async Task SuccessToRegisterParkingLot()
         {
-            FooBar.Domain.Entities.ParkingLot parkingLot = new()
-            {
-                Cylinder = 1600,
-                VehicleType = 1,
-                Plate = "abc-123",
-                StartedAt = new System.DateTime(year: 2022, month: 03, day: 20),
-                Status = false
-            };
+            FooBar.Domain.Entities.ParkingLot parkingLot = new ParkingLotDataBuilder()
+                    .WithCylinder(1600)
+                    .WithVehicleType(1)
+                    .WithStartAt(new System.DateTime(year: 2022, month: 03, day: 20))
+                    .WithPlate("abc-123")
+                    .WithStaus(false).Build();
 
-            _parkingLotRepository.AddAsync(Arg.Any<FooBar.Domain.Entities.ParkingLot>()).Returns(Task.FromResult(
-                new ParkingLotDataBuilder()
-                    .WithCylinder(parkingLot.Cylinder)
-                    .WithStartAt(parkingLot.StartedAt)
-                    .WithPlate(parkingLot.Plate)
-                    .WithPlate(parkingLot.Plate).Build()
-            ));
+            _parkingLotRepository.AddAsync(Arg.Any<FooBar.Domain.Entities.ParkingLot>()).Returns(Task.FromResult(parkingLot));
 
             var result = await _parkingLotService.RegisterParkingLotAsync(parkingLot);
 

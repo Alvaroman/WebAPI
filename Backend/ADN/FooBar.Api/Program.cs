@@ -39,8 +39,9 @@ builder.Services.AddPersistence(config).AddDomainServices().AddRabbitSupport(con
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "Block Api", Version = "v1" });
+    c.SwaggerDoc("v1", new() { Title = "ADN- Álvaro Morales", Version = "v1" });
 });
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 Log.Logger = new LoggerConfiguration().Enrich.FromLogContext()    
     .WriteTo.Console()
@@ -75,7 +76,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting().UseHttpMetrics().UseEndpoints(endpoints =>
 {
-    endpoints.MapGet("/ceiba/blockversion", () => new { version = 1.0, by = "Jose A. Fernandez" });
+    endpoints.MapGet("/ceiba/adn", () => new { version = 1.0, by = "Álvaro Morales" });
     endpoints.MapMetrics();
     endpoints.MapHealthChecks("/health");
 });
