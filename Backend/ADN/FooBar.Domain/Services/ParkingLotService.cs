@@ -46,15 +46,15 @@ namespace FooBar.Domain.Services
 
         public async Task<decimal> ReleaseParkingLotAsync(Guid id)
         {
-            var model = await _repository.GetByIdAsync(id);
-            if (model == null || !model.Status)
+            var parkingLot = await _repository.GetByIdAsync(id);
+            if (parkingLot == null || !parkingLot.Status)
             {
                 throw new NonExistentVehicle("This vehicle is not in the parking lot");
             }
-            model.FinishedAt = DateTime.Now;
-            model.Status = false;
-            decimal cost = _chargerContext.CalculateCharge((int)Math.Truncate((model.FinishedAt.Value - model.StartedAt).TotalHours), model.Cylinder, (VehicleType)model.VehicleType);
-            await _repository.UpdateAsync(model);
+            parkingLot.FinishedAt = DateTime.Now;
+            parkingLot.Status = false;
+            decimal cost = _chargerContext.CalculateCharge((int)Math.Truncate((parkingLot.FinishedAt.Value - parkingLot.StartedAt).TotalHours), parkingLot.Cylinder, (VehicleType)parkingLot.VehicleType);
+            await _repository.UpdateAsync(parkingLot);
             return cost;
         }
     }
