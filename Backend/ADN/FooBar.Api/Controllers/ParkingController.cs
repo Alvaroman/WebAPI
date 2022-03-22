@@ -1,5 +1,5 @@
-﻿using FooBar.Application.Person.Commands;
-using FooBar.Application.Person.Queries;
+﻿using FooBar.Application.ParkingLot.Queries;
+using FooBar.Application.ParkingLot.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +15,13 @@ namespace FooBar.Api.Controllers
 
         [HttpGet("{id}")]
         public async Task<ParkingLotDto> Get(Guid id) => await _mediator.Send(new ParkingLotQuery(id));
+
+        [HttpGet("{id}/cost")]
+        public async Task<decimal> GetCost(Guid id) => await _mediator.Send(new ParkingLotCostQuery(id));
         [HttpPost]
         public async Task Post(ParkingLotCreateCommand parking) => await _mediator.Send(parking);
-        [HttpPut("release/{id}")]
-        public async Task<decimal> Post(Guid id) => await _mediator.Send(new ParkingLotReleaseAsyncCommand(id));
+        [HttpPut("{id}/release")]
+        public async Task Post(Guid id) => await _mediator.Send(new ParkingLotReleaseAsyncCommand(id));
 
     }
 }

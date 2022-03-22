@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace FooBar.Application.Person.Commands
+namespace FooBar.Application.ParkingLot.Commands
 {
     public record ParkingLotReleaseAsyncCommand(
         [Required] Guid id) 

@@ -1,4 +1,4 @@
-﻿namespace FooBar.Application.Person.Queries
+﻿namespace FooBar.Application.ParkingLot.Queries
 {
     public class ParkingLotDto
     {

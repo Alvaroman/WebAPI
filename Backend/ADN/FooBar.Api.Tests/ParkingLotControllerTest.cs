@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using FooBar.Application.Person.Queries;
+using FooBar.Application.ParkingLot.Queries;
 using Xunit;
 
 namespace FooBar.Api.Tests
@@ -21,7 +21,7 @@ namespace FooBar.Api.Tests
         [Fact]
         public async Task PostPersonSuccess()
         {
-            var postContent = new FooBar.Application.Person.Commands.ParkingLotCreateCommand
+            var postContent = new FooBar.Application.ParkingLot.Commands.ParkingLotCreateCommand
             (
                1, "abc-999", DateTime.Now, 2000
             );

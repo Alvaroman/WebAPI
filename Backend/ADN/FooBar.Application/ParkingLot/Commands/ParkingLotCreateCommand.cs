@@ -1,8 +1,7 @@
-﻿using FooBar.Application.Person.Queries;
-using MediatR;
+﻿using MediatR;
 using System.ComponentModel.DataAnnotations;
 
-namespace FooBar.Application.Person.Commands
+namespace FooBar.Application.ParkingLot.Commands
 {
     public record ParkingLotCreateCommand([Required] int VehicleType,
         [Required] string Plate,

@@ -57,5 +57,12 @@ namespace FooBar.Domain.Services
             await _repository.UpdateAsync(parkingLot);
             return cost;
         }
+        public async Task<decimal> GetParkingCostAsync(Guid id)
+        {
+            var parkingLot = await _repository.GetByIdAsync(id);
+            if (parkingLot == null || !parkingLot.Status)
+                throw new NonExistentVehicle("This vehicle is not in the parking lot");
+            return _chargerContext.CalculateCharge((int)Math.Truncate((DateTime.Now - parkingLot.StartedAt).TotalHours), parkingLot.Cylinder, (VehicleType)parkingLot.VehicleType);
+        }
     }
 }

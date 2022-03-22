@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
-using FooBar.Application.Person.Queries;
-using FooBar.Domain.Entities;
+using FooBar.Application.ParkingLot.Queries;
 
 namespace FooBar.Application.Person
 {
@@ -8,7 +7,7 @@ namespace FooBar.Application.Person
     {
         public ParkingLotProfile()
         {
-            CreateMap<ParkingLot, ParkingLotDto>().ReverseMap();
+            CreateMap<Domain.Entities.ParkingLot, ParkingLotDto>().ReverseMap();
         }
     }
 }

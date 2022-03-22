@@ -1,21 +1,15 @@
 ﻿using AutoMapper;
-using FooBar.Domain.Entities;
 using FooBar.Domain.Ports;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FooBar.Application.Person.Queries
+namespace FooBar.Application.ParkingLot.Queries
 {
     public class ParkingLotQueryHandler : IRequestHandler<ParkingLotQuery, ParkingLotDto>
     {
-        private readonly IGenericRepository<ParkingLot> _repository;
+        private readonly IGenericRepository<Domain.Entities.ParkingLot> _repository;
         private readonly IMapper _mapper;
 
-        public ParkingLotQueryHandler(IGenericRepository<ParkingLot> repository, IMapper mapper)
+        public ParkingLotQueryHandler(IGenericRepository<Domain.Entities.ParkingLot> repository, IMapper mapper)
         {
             this._repository = repository;
             this._mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

@@ -1,11 +1,6 @@
-﻿using FooBar.Application.Person.Queries;
+﻿using FooBar.Application.ParkingLot.Commands;
 using FooBar.Domain.Services;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FooBar.Application.Person.Commands
 {
