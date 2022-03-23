@@ -48,7 +48,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: originsAllowedName,
                       builder =>
                       {
-                          builder.WithOrigins(config.GetValue<string>("AllowedOrigins"), "http://localhost:4200", "https://localhost:4200", "localhost:4200", "https://localhost", "http://localhost:4200")
+                          builder.WithOrigins(config.GetValue<string>("AllowedOrigins"), "http://localhost:4200", "https://localhost:4200", "localhost:4200", "https://localhost", "http://localhost:4200");
                       });
 });
 
