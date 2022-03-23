@@ -8,7 +8,7 @@ namespace FooBar.Domain.Entities
     {
         [Range(1, 2, ErrorMessage = "Please enter a valid vehicle type.")]
         public int VehicleType { get; set; } = default!;
-        [StringLength(7, MinimumLength = 6, ErrorMessage = "Please enter a valid plate.")]
+        [StringLength(7, ErrorMessage = "Please enter a valid plate.")]
         public string Plate { get; set; } = default!;
         public int Cylinder { get; set; } = default!;
         public bool Status { get; set; } = default!;

@@ -12,6 +12,7 @@ using Serilog.Sinks.Elasticsearch;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
+var originsAllowedName = "ParkingPoliciy";
 
 builder.Services.AddControllers(opts =>
 {
@@ -42,31 +43,21 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new() { Title = "ADN- Álvaro Morales", Version = "v1" });
 });
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: originsAllowedName,
+                      builder =>
+                      {
+                          builder.WithOrigins(config.GetValue<string>("AllowedOrigins"), "http://localhost:4200", "https://localhost:4200", "localhost:4200", "https://localhost", "http://localhost:4200")
+                      });
+});
 
-Log.Logger = new LoggerConfiguration().Enrich.FromLogContext()    
+Log.Logger = new LoggerConfiguration().Enrich.FromLogContext()
     .WriteTo.Console()
-    // comment this out to send logs to file
-    //.WriteTo.File($"Api-{DateTime.Now.Millisecond}.log", rollingInterval: RollingInterval.Day)
-    // comment this out if logging to elastic is available
-    /*.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
-    {
-        AutoRegisterTemplate = true,
-        FailureCallback = e => Console.WriteLine("Unable to submit event " + e.MessageTemplate),
-        EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog |
-                                       EmitEventFailureHandling.WriteToFailureSink |
-                                       EmitEventFailureHandling.RaiseCallback | EmitEventFailureHandling.ThrowException,
-        AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
-        IndexFormat = "netbackend-log-{0:yyyy.MM}",
-        ModifyConnectionSettings = x =>
-        {
-            x.BasicAuthentication("elastic", "J0867KUe88ukTMR7D8OpDL12");
-            x.ServerCertificateValidationCallback((a, b, c, d) => true);
-            return x;
-        }
-    })*/
     .CreateLogger();
 
 var app = builder.Build();
+app.UseCors(originsAllowedName);
 
 if (app.Environment.IsDevelopment())
 {
@@ -80,7 +71,6 @@ app.UseRouting().UseHttpMetrics().UseEndpoints(endpoints =>
     endpoints.MapMetrics();
     endpoints.MapHealthChecks("/health");
 });
-
 app.UseHttpLogging();
 app.UseHttpsRedirection();
 app.UseAuthorization();

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FooBar.Domain.Enums
+﻿namespace FooBar.Domain.Enums
 {
     /// <summary>
     /// Enums for vehicule types.
@@ -13,5 +7,5 @@ namespace FooBar.Domain.Enums
     {
         Car = 1,
         Motorcycle = 2
-    }
+    } 
 }
