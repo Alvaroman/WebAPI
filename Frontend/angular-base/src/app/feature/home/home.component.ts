@@ -10,7 +10,8 @@ import { ProductoService } from "@producto/shared/service/producto.service";
 export class HomeComponent implements OnInit {
   single: any[];
   multi: any[];
-  view: [number, number] = [900, 600];
+  viewLine: [number, number] = [1200, 500];
+  viewPie: [number, number] = [400, 200];
   colorScheme = {
     domain: ["#770A0A", "#40770A"],
   };
@@ -62,7 +63,7 @@ export class HomeComponent implements OnInit {
           ).length,
         });
       });
-      let seriesDates = [{ name: "Car", series: carsSeries }];
+      let seriesDates = [{ name: "Cars", series: carsSeries }];
       let motorcycleSeries: any[] = [];
       new Set(
         this.parkingLots
@@ -78,7 +79,7 @@ export class HomeComponent implements OnInit {
           ).length,
         });
       });
-      seriesDates.push({ name: "Motorcicle", series: motorcycleSeries });
+      seriesDates.push({ name: "Motorcicles", series: motorcycleSeries });
       this.single = [
         {
           name: "Motorcycles",
