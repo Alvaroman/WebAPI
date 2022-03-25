@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Parkinglot } from "./shared/model/ParkingLot";
 import { ProductoService } from "@producto/shared/service/producto.service";
-// import { BrowserModule } from '@angular/platform-browser';
-// import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
@@ -93,6 +92,7 @@ export class HomeComponent implements OnInit {
       this.multi = seriesDates;
       console.log(this.multi);
       console.log(this.single);
+
       let myResults = this.multi;
       let mySingle = this.single;
 

@@ -7,6 +7,7 @@ import { HomeComponent } from "@home/home.component";
 import { ProductoModule } from "@producto/producto.module";
 import { CoreModule } from "@core/core.module";
 import { CookieService } from "ngx-cookie-service";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -15,6 +16,7 @@ import { CookieService } from "ngx-cookie-service";
     AppRoutingModule,
     ProductoModule,
     CoreModule,
+    NgxChartsModule,
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
