@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Parkinglot } from "./shared/model/ParkingLot";
-import { ProductoService } from "@producto/shared/service/producto.service";
+import { ParkinglotService } from "../parkinglot/shared/service/parkintlot.service";
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
   public parkingLots: Parkinglot[] = [];
 
-  constructor(protected HomeService: ProductoService) {}
+  constructor(protected HomeService: ParkinglotService) {}
 
   onSelect(data: any): void {
     console.log("Item clicked", JSON.parse(JSON.stringify(data)));
@@ -49,67 +49,95 @@ export class HomeComponent implements OnInit {
     this.HomeService.consultar().subscribe((resp) => {
       this.parkingLots = resp.filter((x) => x.status);
       console.log(this.parkingLots);
-      let carsSeries: any[] = [];
-      let carDates = new Set(
-        this.parkingLots
-          .filter((x) => x.vehicleType == 1)
-          .map((x) => new Date(x.startedAt).toLocaleDateString())
-      );
-      carDates.forEach((date) => {
-        let count = this.parkingLots.filter(
-          (x) =>
-            x.vehicleType == 1 &&
-            new Date(x.startedAt).toLocaleDateString() == date
-        ).length;
-        carsSeries.push({
-          name: date,
-          value: count,
-        });
-        this.carDayAverage += count;
-      });
-      this.carDayAverage = this.carDayAverage / carDates.size;
-      let seriesDates = [{ name: "Cars", series: carsSeries }];
-      let motorcycleSeries: any[] = [];
-      let motorcycleDates = new Set(
-        this.parkingLots
-          .filter((x) => x.vehicleType == 2)
-          .map((x) => new Date(x.startedAt).toLocaleDateString())
-      );
-      motorcycleDates.forEach((date) => {
-        let count = this.parkingLots.filter(
-          (x) =>
-            x.vehicleType == 2 &&
-            new Date(x.startedAt).toLocaleDateString() == date
-        ).length;
-        motorcycleSeries.push({
-          name: date,
-          value: count,
-        });
-        this.motorcycleDayAverage += count;
-      });
-      this.motorcycleDayAverage =
-        this.motorcycleDayAverage / motorcycleDates.size;
 
-      seriesDates.push({ name: "Motorcicles", series: motorcycleSeries });
+      this.setCarData();
+      this.setMotorcycleData();
+      let myResults = this.multi;
+      let mySingle = this.single;
+      Object.assign(this, { myResults });
+      Object.assign(this, { mySingle });
+    });
+  }
+  setCarData() {
+    let carsSeries: any[] = [];
+    let carDates = new Set(
+      this.parkingLots
+        .sort((a, b) => {
+          return new Date(a.startedAt) > new Date(b.startedAt) ? 1 : -1;
+        })
+        .filter((x) => x.vehicleType == 1)
+        .map((x) => new Date(x.startedAt).toLocaleDateString())
+    );
+    carDates.forEach((date) => {
+      let count = this.parkingLots.filter(
+        (x) =>
+          x.vehicleType == 1 &&
+          new Date(x.startedAt).toLocaleDateString() == date
+      ).length;
+      carsSeries.push({
+        name: date,
+        value: count,
+      });
+      this.carDayAverage += count;
+    });
+    this.carDayAverage = parseFloat(
+      (this.carDayAverage / carDates.size).toFixed(2)
+    );
+    if (this.multi) {
+      this.multi.push({ name: "Cars", series: carsSeries });
+    } else {
+      this.multi = [{ name: "Cars", series: carsSeries }];
+    }
+    if (this.single) {
+      this.single.push({
+        name: "Cars",
+        value: this.parkingLots.filter((x) => x.vehicleType == 1).length,
+      });
+    } else {
       this.single = [
-        {
-          name: "Motorcycles",
-          value: this.parkingLots.filter((x) => x.vehicleType == 2).length,
-        },
         {
           name: "Cars",
           value: this.parkingLots.filter((x) => x.vehicleType == 1).length,
         },
       ];
-      this.multi = seriesDates;
-      console.log(this.multi);
-      console.log(this.single);
+    }
+  }
+  setMotorcycleData() {
+    let motorcycleSeries: any[] = [];
+    console.log(
+      this.parkingLots.sort((a, b) => {
+        return new Date(a.startedAt) > new Date(b.startedAt) ? 1 : -1;
+      })
+    );
+    let motorcycleDates = new Set(
+      this.parkingLots
+        .sort((a, b) => {
+          return new Date(a.startedAt) > new Date(b.startedAt) ? 1 : -1;
+        })
+        .filter((x) => x.vehicleType == 2)
+        .map((x) => new Date(x.startedAt).toLocaleDateString())
+    );
+    motorcycleDates.forEach((date) => {
+      let count = this.parkingLots.filter(
+        (x) =>
+          x.vehicleType == 2 &&
+          new Date(x.startedAt).toLocaleDateString() == date
+      ).length;
+      motorcycleSeries.push({
+        name: date,
+        value: count,
+      });
+      this.motorcycleDayAverage += count;
+    });
+   
+    this.motorcycleDayAverage = parseFloat(
+      (this.motorcycleDayAverage / motorcycleDates.size).toFixed(2)
+    );
 
-      let myResults = this.multi;
-      let mySingle = this.single;
-
-      Object.assign(this, { myResults });
-      Object.assign(this, { mySingle });
+    this.multi.push({ name: "Motorcicles", series: motorcycleSeries });
+    this.single.push({
+      name: "Motorcycles",
+      value: this.parkingLots.filter((x) => x.vehicleType == 2).length,
     });
   }
 }

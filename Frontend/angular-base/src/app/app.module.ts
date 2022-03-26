@@ -9,6 +9,7 @@ import { CoreModule } from "@core/core.module";
 import { CookieService } from "ngx-cookie-service";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ParkingLotModule } from "./feature/parkinglot/parkinglot.module";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -16,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     ProductoModule,
+    ParkingLotModule,
     CoreModule,
     NgxChartsModule,
     BrowserAnimationsModule
