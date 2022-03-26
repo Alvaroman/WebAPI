@@ -8,6 +8,7 @@ import { ProductoModule } from "@producto/producto.module";
 import { CoreModule } from "@core/core.module";
 import { CookieService } from "ngx-cookie-service";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -17,6 +18,7 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
     ProductoModule,
     CoreModule,
     NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

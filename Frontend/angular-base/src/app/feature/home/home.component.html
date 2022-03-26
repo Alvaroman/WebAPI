@@ -1,32 +1,72 @@
 <br />
-  <div class="row">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header"><b>Parking lot history</b></div>
-        <div class="card-body">
-          <ngx-charts-line-chart
-            [view]="viewLine"
-            [scheme]="colorScheme"
-            [legend]="legend"
-            [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel"
-            [xAxis]="xAxis"
-            [yAxis]="yAxis"
-            [xAxisLabel]="xAxisLabel"
-            [yAxisLabel]="yAxisLabel"
-            [timeline]="timeline"
-            [results]="multi"
-            (select)="onSelect($event)"
-            (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)"
-          >
-          </ngx-charts-line-chart>
+<div class="row text-center">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header"><b>Parking lot history</b></div>
+      <div class="card-body">
+        <ngx-charts-line-chart
+          [view]="viewLine"
+          [scheme]="colorScheme"
+          [legend]="legend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxis]="xAxis"
+          [yAxis]="yAxis"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          [timeline]="timeline"
+          [results]="multi"
+          (select)="onSelect($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)"
+        >
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 row">
+    <div class="row">
+      <div class="col-md-12 col-sm-12" style="display: flex">
+        <div
+          class="card text-dark bg-Light mb-3"
+          style="max-width: 18rem; margin-right: 1rem"
+        >
+          <div class="card-header">
+            <b
+              >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Car visits
+              average&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b
+            >
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Visits per day</h5>
+            <h3>
+              <span class="badge rounded-pill bg-secondary">{{
+                motorcycleDayAverage
+              }}</span>
+            </h3>
+          </div>
+        </div>
+        <div
+          class="card text-dark bg-Light mb-3"
+          style="max-width: 18rem; margin-left: 1rem"
+        >
+          <div class="card-header">
+            <b>&nbsp;&nbsp;Motorcycle visits average&nbsp;&nbsp;</b>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Visits per day</h5>
+            <h3>
+              <span class="badge rounded-pill bg-secondary">{{
+                carDayAverage
+              }}</span>
+            </h3>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-12">
       <div class="card">
-        <div class="card-header"><b>Vehicles in the parking lot</b></div>
+        <div class="card-header"><b>Vehicles at the parking lot</b></div>
         <div class="card-body">
           <ngx-charts-advanced-pie-chart
             [view]="viewPie"
@@ -42,3 +82,4 @@
       </div>
     </div>
   </div>
+</div>
