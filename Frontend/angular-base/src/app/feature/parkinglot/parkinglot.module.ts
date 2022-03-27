@@ -1,12 +1,20 @@
-import { NgModule } from '@angular/core';
-import { ParkinglotService } from './shared/service/parkintlot.service';
+import { NgModule } from "@angular/core";
+import { ParkinglotService } from "./shared/service/parkintlot.service";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { CreateParkinglotComponent } from "./components/create-parkinglot/create-parkinglot.component";
+import { ParkingLotRoutingModule } from "./parkinglot-routing.module";
+import { SharedModule } from "@shared/shared.module";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
-    declarations: [
-    ],
-    imports: [
-    ],
-    providers: [ParkinglotService]
-  })
-  export class ParkingLotModule { }
-  
+  declarations: [DashboardComponent, CreateParkinglotComponent],
+  imports: [
+    ParkingLotRoutingModule,
+    SharedModule,
+    NgxChartsModule,
+    BrowserAnimationsModule,
+  ],
+  providers: [ParkinglotService],
+})
+export class ParkingLotModule {}

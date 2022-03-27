@@ -7,7 +7,7 @@ import { HttpService } from "@core/services/http.service";
 export class ParkinglotService {
   constructor(protected http: HttpService) {}
 
-  public consultar() {
+  public get() {
     return this.http.doGet<Parkinglot[]>(`${environment.endpoint}/parking`);
   }
 

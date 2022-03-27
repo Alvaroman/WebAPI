@@ -1,0 +1,109 @@
+<br />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          <b>Vehicles at the parking lot</b>
+        </div>
+        <div class="card-body">
+          <div style="overflow-x: auto">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Row</th>
+                  <th>Plate</th>
+                  <th>Vehicle type</th>
+                  <th>Started At</th>
+                </tr>
+              </thead>
+              <tbody style="font-weight: normal !important">
+                <tr *ngFor="let vehicle of parkingLots; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ vehicle.plate }}</td>
+                  <td>{{ vehicle.vehicleType == 1 ? "Car" : "Motorcicle" }}</td>
+                  <td>
+                    {{ getStartedAtHourPart(vehicle.id) }}-
+                    {{ getStartedAtDatePart(vehicle.id) }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center">
+          <b>Register a new ingress</b>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="mb-3">
+              <label for="vehicleType" class="form-label">Vehicle Type</label>
+              <select
+                class="form-select"
+                id="vehicleType"
+                aria-label="Default select example"
+              >
+                <option selected>Select the vehicle type</option>
+                <option value="1">Car</option>
+                <option value="2">Motorcycle</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="plate" class="form-label">Plate</label>
+              <input
+                type="text"
+                class="form-control"
+                id="plate"
+                aria-describedby="plateHelp"
+              />
+              <div id="plateHelp" class="form-text">
+                We'll never share your email with anyone else.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="cylinder" class="form-label">Cylinder</label>
+              <input
+                type="number"
+                class="form-control"
+                id="cylinder"
+                step="100"
+              />
+            </div>
+            <div class="mb-3 text-center">
+              <div
+                class="alert alert-primary d-flex align-items-center alert-dismissible fade show"
+                role="alert"
+              >
+                <svg
+                  class="bi flex-shrink-0 me-2"
+                  width="24"
+                  height="24"
+                  role="img"
+                  aria-label="Info:"
+                >
+                  <use xlink:href="#info-fill" />
+                </svg>
+                <div> The time for the vehicle will start running when you submit this form</div>
+                <button
+                  type="button"
+                  class="btn-close"
+                  style="font-size: 10px"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+            </div>
+            <div class="mb-3 text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
