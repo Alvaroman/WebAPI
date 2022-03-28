@@ -11,8 +11,8 @@ export class ParkinglotService {
     return this.http.doGet<Parkinglot[]>(`${environment.endpoint}/parking`);
   }
 
-  public guardar(parkingLot: Parkinglot) {
-    this.http.doPost<Parkinglot, any>(
+  public save(parkingLot: Parkinglot) {
+    return this.http.doPost<Parkinglot, any>(
       `${environment.endpoint}/parking`,
       parkingLot
     );

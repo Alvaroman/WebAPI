@@ -6,6 +6,7 @@ import { ParkingLotRoutingModule } from "./parkinglot-routing.module";
 import { SharedModule } from "@shared/shared.module";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [DashboardComponent, CreateParkinglotComponent],
@@ -14,6 +15,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     SharedModule,
     NgxChartsModule,
     BrowserAnimationsModule,
+    FormsModule,
   ],
   providers: [ParkinglotService],
 })
