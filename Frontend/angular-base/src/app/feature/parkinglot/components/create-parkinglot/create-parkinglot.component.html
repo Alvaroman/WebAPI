@@ -1,7 +1,7 @@
 <br />
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-7">
       <div class="card">
         <div class="card-header text-center">
           <b>Vehicles at the parking lot</b>
@@ -15,6 +15,7 @@
                   <th>Plate</th>
                   <th>Vehicle type</th>
                   <th>Started at</th>
+                  <th>Charge request</th>
                   <th>Release vehicle</th>
                 </tr>
               </thead>
@@ -27,6 +28,7 @@
                     {{ getStartedAtHourPart(vehicle.id) }}-
                     {{ getStartedAtDatePart(vehicle.id) }}
                   </td>
+                  <td><button class="btn btn-info" (click)="onCostRequest(vehicle.id)">Get charge</button></td>
                   <td><button class="btn btn-secondary" (click)="onRelease(vehicle.id)">Release</button></td>
                 </tr>
               </tbody>
@@ -36,7 +38,7 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="card">
         <div class="card-header text-center">
           <b>Register a new ingress</b>

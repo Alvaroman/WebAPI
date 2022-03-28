@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FooBar.Domain.Exception
+﻿namespace FooBar.Domain.Exception
 {
     public class NonExistentVehicle : AppException
     {

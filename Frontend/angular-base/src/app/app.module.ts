@@ -8,8 +8,9 @@ import { ProductoModule } from "@producto/producto.module";
 import { CoreModule } from "@core/core.module";
 import { CookieService } from "ngx-cookie-service";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ParkingLotModule } from "./feature/parkinglot/parkinglot.module";
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
   declarations: [AppComponent, HomeComponent],
@@ -20,7 +21,8 @@ import { ParkingLotModule } from "./feature/parkinglot/parkinglot.module";
     ParkingLotModule,
     CoreModule,
     NgxChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ positionClass: "toast-bottom-right" }),
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

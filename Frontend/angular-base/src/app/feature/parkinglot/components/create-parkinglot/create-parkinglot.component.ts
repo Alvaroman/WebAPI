@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Parkinglot } from "@home/shared/model/parkinglot";
 import { ParkinglotService } from "../../shared/service/parkintlot.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { ToastrService } from "ngx-toastr";
+
 @Component({
   selector: "app-create-parkinglot",
   templateUrl: "./create-parkinglot.component.html",
@@ -10,7 +12,10 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 export class CreateParkinglotComponent implements OnInit {
   parkingLots: Parkinglot[];
   parkinglotForm: FormGroup;
-  constructor(protected service: ParkinglotService) {}
+  constructor(
+    protected service: ParkinglotService,
+    protected toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.getParkingLotData();
@@ -39,19 +44,49 @@ export class CreateParkinglotComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.parkinglotForm);
-    this.service.create(this.parkinglotForm.value).subscribe((resp) => {
-      console.log(resp);
-      this.parkinglotForm.reset();
-      this.buildParkingLotForm();
-      this.getParkingLotData();
-    });
+    this.service.create(this.parkinglotForm.value).subscribe(
+      (resp) => {
+        console.log(resp);
+        this.toastr.success("Vehicle registered correctly!");
+        this.buildParkingLotForm();
+        this.getParkingLotData();
+      },
+      (err) => {
+        console.log(err);
+        this.toastr.error(err.error.message);
+      }
+    );
   }
   onRelease(id: string) {
     console.log(id);
-    this.service.release(id).subscribe(resp=>{
-      console.log(resp);
-      this.getParkingLotData();
-    });
+    this.service.release(id).subscribe(
+      (resp) => {
+        console.log(resp);
+        this.getParkingLotData();
+        this.toastr.success("Vehicle released correctly!");
+      },
+      (err) => {
+        console.log(err);
+        this.toastr.error(err.error.message);
+      }
+    );
+  }
+  onCostRequest(id: string) {
+    console.log(id);
+    this.service.getCost(id).subscribe(
+      (resp) => {
+        console.log(resp);
+        this.getParkingLotData();
+        this.toastr.info(`The cost is: ${resp}`, "Cost request", {
+          timeOut: 10000,
+          progressBar: true,
+        });
+      },
+      (err) => {
+        console.log(err);
+        this.toastr.error(err.error.message);
+      }
+    );
   }
   private buildParkingLotForm() {
     this.parkinglotForm = new FormGroup({
