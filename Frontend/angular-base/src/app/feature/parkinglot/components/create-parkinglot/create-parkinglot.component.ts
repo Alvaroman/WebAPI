@@ -7,7 +7,7 @@ import { ToastrService } from "ngx-toastr";
 @Component({
   selector: "app-create-parkinglot",
   templateUrl: "./create-parkinglot.component.html",
-  styleUrls: ["./create-parkinglot.component.css"],
+  styleUrls: ["./create-parkinglot.component.css"]
 })
 export class CreateParkinglotComponent implements OnInit {
   parkingLots: Parkinglot[];
