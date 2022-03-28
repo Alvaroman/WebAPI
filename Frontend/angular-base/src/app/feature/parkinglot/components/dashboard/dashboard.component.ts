@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit {
       (this.motorcycleDayAverage / motorcycleDates.size).toFixed(2)
     );
 
-    this.multi.push({ name: "Motorcicles", series: motorcycleSeries });
+    this.multi.push({ name: "Motorcycles", series: motorcycleSeries });
     this.single.push({
       name: "Motorcycles",
       value: this.parkingLots.filter(

@@ -26,7 +26,7 @@ namespace FooBar.Api.Controllers
         public async Task Post(ParkingLotCreateCommand parking) => await _mediator.Send(parking);
 
         [HttpPut("{id}/release")]
-        public async Task Release(Guid id) => await _mediator.Send(new ParkingLotReleaseAsyncCommand(id));
+        public async Task<decimal> Release(Guid id) => await _mediator.Send(new ParkingLotReleaseAsyncCommand(id));
 
     }
 }
