@@ -38,7 +38,6 @@ export class DashboardComponent implements OnInit {
   constructor(protected HomeService: ParkinglotService) {}
 
   ngOnInit(): void {
-    console.log(this.HomeService);
     this.HomeService.get().subscribe((resp) => {
       this.parkingLots = resp;
 
