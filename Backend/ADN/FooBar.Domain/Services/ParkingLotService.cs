@@ -31,6 +31,10 @@ namespace FooBar.Domain.Services
             if (!_picoPlacaContext.ValidatePicoPlaca(parkingLot.Plate, (VehicleType)parkingLot.VehicleType))
                 throw new PicoPlacaException("Your vehicle is not allowed due to 'pico y placa' rule");
 
+            var vehicleRegistered = await _repository.GetAsync(x => x.Plate.Equals(parkingLot.Plate));
+            if (vehicleRegistered.Any())
+                throw new AlreadyRegisteredException("The vehicle is already at the parking lot");
+
             var vehiclesInUse = await _repository.GetAsync(x => x.Status && x.VehicleType == parkingLot.VehicleType);
             if (vehiclesInUse != null && vehiclesInUse.Any())
             {

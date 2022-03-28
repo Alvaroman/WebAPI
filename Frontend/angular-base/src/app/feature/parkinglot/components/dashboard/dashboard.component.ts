@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { Parkinglot } from "./shared/model/ParkingLot";
-import { ParkinglotService } from "../parkinglot/shared/service/parkintlot.service";
+import { Parkinglot } from "../../shared/model/parkinglot";
+import { ParkinglotService } from "../../shared/service/parkintlot.service";
+
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
+  selector: "app-dashboard",
+  templateUrl: "./dashboard.component.html",
   styles: [],
 })
-export class HomeComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   single: any[];
   multi: any[];
   viewLine: [number, number] = [1200, 500];
@@ -47,7 +48,7 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
     this.HomeService.get().subscribe((resp) => {
-      this.parkingLots = resp.filter((x) => x.status);
+      this.parkingLots = resp;
       console.log(this.parkingLots);
 
       this.setCarData();
@@ -91,13 +92,17 @@ export class HomeComponent implements OnInit {
     if (this.single) {
       this.single.push({
         name: "Cars",
-        value: this.parkingLots.filter((x) => x.vehicleType == 1).length,
+        value: this.parkingLots.filter(
+          (vehicle) => vehicle.status && vehicle.vehicleType == 1
+        ).length,
       });
     } else {
       this.single = [
         {
           name: "Cars",
-          value: this.parkingLots.filter((x) => x.vehicleType == 1).length,
+          value: this.parkingLots.filter(
+            (vehicle) => vehicle.status && vehicle.vehicleType == 1
+          ).length,
         },
       ];
     }
@@ -129,7 +134,7 @@ export class HomeComponent implements OnInit {
       });
       this.motorcycleDayAverage += count;
     });
-   
+
     this.motorcycleDayAverage = parseFloat(
       (this.motorcycleDayAverage / motorcycleDates.size).toFixed(2)
     );
@@ -137,7 +142,9 @@ export class HomeComponent implements OnInit {
     this.multi.push({ name: "Motorcicles", series: motorcycleSeries });
     this.single.push({
       name: "Motorcycles",
-      value: this.parkingLots.filter((x) => x.vehicleType == 2).length,
+      value: this.parkingLots.filter(
+        (vehicle) => vehicle.status && vehicle.vehicleType == 2
+      ).length,
     });
   }
 }

@@ -48,7 +48,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: originsAllowedName,
                       builder =>
                       {
-                          builder.WithOrigins(config.GetValue<string>("AllowedOrigins")).AllowAnyHeader();
+                          builder.WithOrigins(config.GetValue<string>("AllowedOrigins")).AllowAnyHeader().AllowAnyMethod();
                       });
 });
 
