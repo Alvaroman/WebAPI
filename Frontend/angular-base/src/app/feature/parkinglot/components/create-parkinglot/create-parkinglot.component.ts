@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Parkinglot } from "@home/shared/model/parkinglot";
+import { Parkinglot } from "../../shared/model/parkinglot"; 
 import { ParkinglotService } from "../../shared/service/parkintlot.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
@@ -43,7 +43,6 @@ export class CreateParkinglotComponent implements OnInit {
       : "";
   }
   onSubmit() {
-    console.log(this.parkinglotForm);
     this.service.create(this.parkinglotForm.value).subscribe(
       (resp) => {
         console.log(resp);

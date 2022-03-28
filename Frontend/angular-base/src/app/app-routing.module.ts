@@ -7,7 +7,6 @@ import { DashboardComponent } from './feature/parkinglot/components/dashboard/da
 const routes: Routes = [
   { path: '', redirectTo: '/parkinglot', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent, canActivate: [SecurityGuard]  },
-  { path: 'producto', loadChildren: () => import('@producto/producto.module').then(mod => mod.ProductoModule) }
   
 ];
 
