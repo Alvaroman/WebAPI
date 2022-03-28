@@ -7,7 +7,6 @@ const routes: Routes = [
   {
     path: "parkinglot",
     component: DashboardComponent,
-    // children: [{ path: "create", component: CreateParkinglotComponent }],
   },
   {
     path: "create",

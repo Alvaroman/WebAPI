@@ -37,19 +37,10 @@ export class DashboardComponent implements OnInit {
 
   constructor(protected HomeService: ParkinglotService) {}
 
-  onSelect(data: any): void {
-    console.log("Item clicked", JSON.parse(JSON.stringify(data)));
-  }
-  onActivate(data: any): void {
-    console.log("Activate", JSON.parse(JSON.stringify(data)));
-  }
-  onDeactivate(data: any): void {
-    console.log("Deactivate", JSON.parse(JSON.stringify(data)));
-  }
   ngOnInit(): void {
+    console.log(this.HomeService);
     this.HomeService.get().subscribe((resp) => {
       this.parkingLots = resp;
-      console.log(this.parkingLots);
 
       this.setCarData();
       this.setMotorcycleData();
@@ -109,11 +100,6 @@ export class DashboardComponent implements OnInit {
   }
   setMotorcycleData() {
     let motorcycleSeries: any[] = [];
-    console.log(
-      this.parkingLots.sort((a, b) => {
-        return new Date(a.startedAt) > new Date(b.startedAt) ? 1 : -1;
-      })
-    );
     let motorcycleDates = new Set(
       this.parkingLots
         .sort((a, b) => {

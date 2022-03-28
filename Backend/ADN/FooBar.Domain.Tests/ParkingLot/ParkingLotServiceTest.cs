@@ -31,14 +31,12 @@ namespace FooBar.Domain.Tests.ParkingLot
         {
             try
             {
-                Domain.Entities.ParkingLot notAllowedVehicle = new()
-                {
-                    Cylinder = 0,
-                    Plate = "abc-123",
-                    StartedAt = System.DateTime.Now,
-                    Status = false,
-                    VehicleType = 3
-                };
+                FooBar.Domain.Entities.ParkingLot notAllowedVehicle = new ParkingLotDataBuilder()
+                 .WithCylinder(0)
+                 .WithVehicleType(3)
+                 .WithStartAt(System.DateTime.Now)
+                 .WithPlate("abc-123")
+                 .WithStaus(false).Build();
                 await _parkingLotService.RegisterParkingLotAsync(notAllowedVehicle);
             }
             catch (System.Exception ex)
@@ -51,15 +49,13 @@ namespace FooBar.Domain.Tests.ParkingLot
         {
             try
             {
-                Domain.Entities.ParkingLot notAllowedVehicle = new()
-                {
-                    Cylinder = 450,
-                    Plate = "abc-623",
-                    StartedAt = new System.DateTime(year: 2022, month: 03, day: 21),
-                    Status = false,
-                    VehicleType = 2
-                };
-                await _parkingLotService.RegisterParkingLotAsync(notAllowedVehicle);
+                FooBar.Domain.Entities.ParkingLot notAllowedByPicoPlaca = new ParkingLotDataBuilder()
+                  .WithCylinder(450)
+                  .WithVehicleType(2)
+                  .WithStartAt(new System.DateTime(year: 2022, month: 03, day: 21))
+                  .WithPlate("abc-623")
+                  .WithStaus(false).Build();
+                await _parkingLotService.RegisterParkingLotAsync(notAllowedByPicoPlaca);
             }
             catch (System.Exception ex)
             {
