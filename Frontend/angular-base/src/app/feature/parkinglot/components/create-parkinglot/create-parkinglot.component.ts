@@ -70,7 +70,6 @@ export class CreateParkinglotComponent implements OnInit {
     );
   }
   onCostRequest(id: string) {
-    console.log(id);
     this.service.getCost(id).subscribe(
       (resp) => {
         console.log(resp);
