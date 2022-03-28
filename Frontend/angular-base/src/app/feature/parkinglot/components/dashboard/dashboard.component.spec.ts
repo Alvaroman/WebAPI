@@ -88,7 +88,16 @@ describe("DashboardComponent", () => {
     ];
     app.setCarData();
     app.setMotorcycleData();
-
-    expect(app.single).toBeFalsy();
+    const seriesObject = [
+      {
+        name: "Cars",
+        value: 1,
+      },
+      {
+        name: "Motorcycles",
+        value: 1,
+      },
+    ];
+    expect(app.single).toEqual(seriesObject);
   });
 });
