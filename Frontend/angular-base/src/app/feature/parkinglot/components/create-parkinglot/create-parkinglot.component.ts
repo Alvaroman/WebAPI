@@ -57,7 +57,6 @@ export class CreateParkinglotComponent implements OnInit {
     );
   }
   onRelease(id: string) {
-    console.log(id);
     this.service.release(id).subscribe(
       (resp) => {
         console.log(resp);
