@@ -11,10 +11,16 @@ export class ParkinglotService {
     return this.http.doGet<Parkinglot[]>(`${environment.endpoint}/parking`);
   }
 
-  public save(parkingLot: Parkinglot) {
+  public create(parkingLot: Parkinglot) {
     return this.http.doPost<Parkinglot, any>(
       `${environment.endpoint}/parking`,
       parkingLot
+    );
+  }
+  public release(id: string) {
+    return this.http.doPut<Parkinglot, any>(
+      `${environment.endpoint}/parking/${id}/release`,
+      null
     );
   }
 }

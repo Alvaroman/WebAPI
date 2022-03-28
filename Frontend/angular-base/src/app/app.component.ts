@@ -10,7 +10,7 @@ export class AppComponent {
   title = "app-base";
   public companies: MenuItem[] = [
     { url: "/parkinglot", nombre: "Dashboard" },
-    { url: "/create", nombre: "Ingress" },
+    { url: "/create", nombre: "Registered Vehicles" },
     { url: "/parkinglot", nombre: "About" },
   ];
 }

@@ -39,18 +39,17 @@ export class CreateParkinglotComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.parkinglotForm);
-    // let newParkingLot: Parkinglot = {
-    //   cylinder: <number>parkinglotForm.value.cylinder,
-    //   plate: <string>parkinglotForm.value.plate,
-    //   vehicleType: <number>parkinglotForm.value.vehicleType,
-    //   id: "",
-    //   finishedAt: new Date(),
-    //   startedAt: new Date(),
-    //   status: false,
-    // };
-    this.service.save(this.parkinglotForm.value).subscribe((resp) => {
+    this.service.create(this.parkinglotForm.value).subscribe((resp) => {
       console.log(resp);
       this.parkinglotForm.reset();
+      this.buildParkingLotForm();
+      this.getParkingLotData();
+    });
+  }
+  onRelease(id: string) {
+    console.log(id);
+    this.service.release(id).subscribe(resp=>{
+      console.log(resp);
       this.getParkingLotData();
     });
   }
@@ -60,6 +59,7 @@ export class CreateParkinglotComponent implements OnInit {
       cylinder: new FormControl("", [Validators.required]),
       plate: new FormControl("", [Validators.required]),
       vehicleType: new FormControl("", [Validators.required]),
+      startedAt: new FormControl(new Date()),
     });
   }
 }
