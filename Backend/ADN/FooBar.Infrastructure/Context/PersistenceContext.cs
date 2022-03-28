@@ -28,14 +28,14 @@ namespace FooBar.Infrastructure.Context
             }
 
             modelBuilder.HasDefaultSchema(_config.GetValue<string>("SchemaName"));
-            modelBuilder.Entity<Person>();
-
+            modelBuilder.Entity<ParkingLot>();
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
                 var t = entityType.ClrType;
                 if (typeof(DomainEntity).IsAssignableFrom(t))
                 {
+                    modelBuilder.Entity(entityType.Name).Property<Guid>("Id").HasDefaultValueSql("NEWID()");
                     modelBuilder.Entity(entityType.Name).Property<DateTime>("CreatedOn").HasDefaultValueSql("GETDATE()");
                     modelBuilder.Entity(entityType.Name).Property<DateTime>("LastModifiedOn").HasDefaultValueSql("GETDATE()");
                 }

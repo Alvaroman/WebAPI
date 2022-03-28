@@ -1,0 +1,135 @@
+<br />
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="card">
+        <div class="card-header text-center">
+          <b>Vehicles at the parking lot</b>
+        </div>
+        <div class="card-body">
+          <div style="overflow-x: auto">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Row</th>
+                  <th>Plate</th>
+                  <th>Vehicle type</th>
+                  <th>Started at</th>
+                  <th>Charge request</th>
+                  <th>Release vehicle</th>
+                </tr>
+              </thead>
+              <tbody style="font-weight: normal !important">
+                <tr *ngFor="let vehicle of parkingLots; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ vehicle.plate }}</td>
+                  <td>{{ vehicle.vehicleType == 1 ? "Car" : "Motorcicle" }}</td>
+                  <td>
+                    {{ getStartedAtHourPart(vehicle.id) }}-
+                    {{ getStartedAtDatePart(vehicle.id) }}
+                  </td>
+                  <td><button class="btn btn-secondary" (click)="onCostRequest(vehicle.id)">Get charge</button></td>
+                  <td><button class="btn btn-secondary" (click)="onRelease(vehicle.id)">Release</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-header text-center">
+          <b>Register a new ingress</b>
+        </div>
+        <div class="card-body">
+          <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"
+              />
+            </symbol>
+          </svg>
+          <form [formGroup]="parkinglotForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+              <label for="vehicleType" class="form-label">Vehicle Type</label>
+              <select
+                ngModel
+                validar
+                class="form-select"
+                id="vehicleType"
+                formControlName="vehicleType"
+                placeholder="Select the vehicle type"
+                required="You must select a vehicle type"
+              >
+                <option selected value="1">Car</option>
+                <option value="2">Motorcycle</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="plate" class="form-label">Plate</label>
+              <input
+                ngModel
+                validar
+                type="text"
+                class="form-control"
+                id="plate"
+                name="plate"
+                formControlName="plate"
+                aria-describedby="plateHelp"
+                placeholder="Enter the vehicle plate"
+                required="You must enter a vehicle plate"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="cylinder" class="form-label">Cylinder</label>
+              <input
+                ngModel
+                type="number"
+                class="form-control"
+                id="cylinder"
+                name="cylinder"
+                formControlName="cylinder"
+                step="100"
+                validar
+                placeholder="Enter the vehicle cylinder"
+                required="You must enter the cylinder"
+              />
+            </div>
+            <div class="mb-3 text-center">
+              <div
+                class="alert alert-primary d-flex align-items-center alert-dismissible fade show"
+                role="alert"
+              >
+                <svg
+                  class="bi flex-shrink-0 me-2"
+                  width="24"
+                  height="24"
+                  role="img"
+                  aria-label="Info:"
+                >
+                  <use xlink:href="#info-fill" />
+                </svg>
+                <div>
+                  The time for the vehicle will start running once you submit
+                  this form
+                </div>
+                <button
+                  type="button"
+                  class="btn-close"
+                  style="font-size: 10px"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+            </div>
+            <div class="mb-3 text-center">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

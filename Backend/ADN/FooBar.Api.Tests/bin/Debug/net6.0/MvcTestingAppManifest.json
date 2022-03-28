@@ -1,6 +1,0 @@
-{
-  "FooBar.Api, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Álvaro Morales\\Desktop\\Ceiba Software\\Prueba\\Plantilla backend\\net-core-hexagonal-cqrs-net6\\ADN\\FooBar.Api",
-  "FooBar.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Álvaro Morales\\Desktop\\Ceiba Software\\Prueba\\Plantilla backend\\net-core-hexagonal-cqrs-net6\\ADN\\FooBar.Application",
-  "FooBar.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Álvaro Morales\\Desktop\\Ceiba Software\\Prueba\\Plantilla backend\\net-core-hexagonal-cqrs-net6\\ADN\\FooBar.Domain",
-  "FooBar.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "C:\\Users\\Álvaro Morales\\Desktop\\Ceiba Software\\Prueba\\Plantilla backend\\net-core-hexagonal-cqrs-net6\\ADN\\FooBar.Infrastructure"
-}

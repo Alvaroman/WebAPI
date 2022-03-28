@@ -12,6 +12,7 @@ using Serilog.Sinks.Elasticsearch;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
+var originsAllowedName = "ParkingPoliciy";
 
 builder.Services.AddControllers(opts =>
 {
@@ -39,33 +40,24 @@ builder.Services.AddPersistence(config).AddDomainServices().AddRabbitSupport(con
 
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "Block Api", Version = "v1" });
+    c.SwaggerDoc("v1", new() { Title = "ADN- Álvaro Morales", Version = "v1" });
+});
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: originsAllowedName,
+                      builder =>
+                      {
+                          builder.WithOrigins(config.GetValue<string>("AllowedOriginFrontend"), config.GetValue<string>("AllowedOriginTest")).AllowAnyHeader().AllowAnyMethod();
+                      });
 });
 
-Log.Logger = new LoggerConfiguration().Enrich.FromLogContext()    
+Log.Logger = new LoggerConfiguration().Enrich.FromLogContext()
     .WriteTo.Console()
-    // comment this out to send logs to file
-    //.WriteTo.File($"Api-{DateTime.Now.Millisecond}.log", rollingInterval: RollingInterval.Day)
-    // comment this out if logging to elastic is available
-    /*.WriteTo.Elasticsearch(new ElasticsearchSinkOptions(new Uri("http://localhost:9200"))
-    {
-        AutoRegisterTemplate = true,
-        FailureCallback = e => Console.WriteLine("Unable to submit event " + e.MessageTemplate),
-        EmitEventFailure = EmitEventFailureHandling.WriteToSelfLog |
-                                       EmitEventFailureHandling.WriteToFailureSink |
-                                       EmitEventFailureHandling.RaiseCallback | EmitEventFailureHandling.ThrowException,
-        AutoRegisterTemplateVersion = AutoRegisterTemplateVersion.ESv7,
-        IndexFormat = "netbackend-log-{0:yyyy.MM}",
-        ModifyConnectionSettings = x =>
-        {
-            x.BasicAuthentication("elastic", "J0867KUe88ukTMR7D8OpDL12");
-            x.ServerCertificateValidationCallback((a, b, c, d) => true);
-            return x;
-        }
-    })*/
     .CreateLogger();
 
 var app = builder.Build();
+app.UseCors(originsAllowedName);
 
 if (app.Environment.IsDevelopment())
 {
@@ -75,11 +67,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting().UseHttpMetrics().UseEndpoints(endpoints =>
 {
-    endpoints.MapGet("/ceiba/blockversion", () => new { version = 1.0, by = "Jose A. Fernandez" });
+    endpoints.MapGet("/ceiba/adn", () => new { version = 1.0, by = "Álvaro Morales" });
     endpoints.MapMetrics();
     endpoints.MapHealthChecks("/health");
 });
-
 app.UseHttpLogging();
 app.UseHttpsRedirection();
 app.UseAuthorization();
