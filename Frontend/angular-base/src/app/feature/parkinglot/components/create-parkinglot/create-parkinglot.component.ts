@@ -98,7 +98,6 @@ export class CreateParkinglotComponent implements OnInit {
       cylinder: new FormControl("", [Validators.required]),
       plate: new FormControl("", [Validators.required]),
       vehicleType: new FormControl("", [Validators.required]),
-      startedAt: new FormControl(new Date()),
     });
   }
 }
