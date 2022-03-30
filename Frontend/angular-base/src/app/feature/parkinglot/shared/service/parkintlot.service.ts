@@ -11,7 +11,9 @@ export class ParkinglotService {
     return this.http.doGet<Parkinglot[]>(`${environment.endpoint}/parking`);
   }
   public getCost(id: string) {
-    return this.http.doGet<number>(`${environment.endpoint}/parking/${id}/cost`);
+    return this.http.doGet<number>(
+      `${environment.endpoint}/parking/${id}/cost`
+    );
   }
   public create(parkingLot: Parkinglot) {
     return this.http.doPost<Parkinglot, any>(
