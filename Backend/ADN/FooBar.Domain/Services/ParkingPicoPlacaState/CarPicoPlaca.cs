@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FooBar.Domain.Services.ParkingPicoPlacaState
+﻿namespace FooBar.Domain.Services.ParkingPicoPlacaState
 {
     public class CarPicoPlaca : PicoPlacaState
     {
@@ -13,7 +7,7 @@ namespace FooBar.Domain.Services.ParkingPicoPlacaState
             if (DateTime.Now.Hour > INITIAL_HOUR && DateTime.Now.Hour < FINAL_HOUR)
             {
                 int[] currentRestrictions = { PICO_Y_PLACA_DAYS[(int)DateTime.Today.DayOfWeek, 0], PICO_Y_PLACA_DAYS[(int)DateTime.Today.DayOfWeek, 1] };
-                int numberToValidate = Convert.ToInt16(plate.Last());
+                int numberToValidate = Convert.ToInt16(plate.Substring(plate.Length - 1));
                 return !currentRestrictions.Contains(numberToValidate);
             }
             else
