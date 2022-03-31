@@ -79,7 +79,6 @@ export class CreateParkinglotComponent implements OnInit {
   onCostRequest(id: string) {
     this.service.getCost(id).subscribe(
       (resp) => {
-        console.log(resp);
         this.getParkingLotData();
         this.toastr.info(`The charge is: "${resp}".`, "Charge request", {
           timeOut: 10000,
