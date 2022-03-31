@@ -22,9 +22,11 @@
                 } while (spentHours / 24 >= 1);
                 if (spentHours > 0)
                     charge += spentHours * HourCharge;
-
             }
-            return !CylinderRestriction ? charge : charge + (cylinder >= CylinderLimit ? CylinderOverCharge : 0);
+            if (CylinderRestriction && cylinder >= CylinderLimit)
+                charge += CylinderOverCharge;
+
+            return charge;
         }
     }
 }

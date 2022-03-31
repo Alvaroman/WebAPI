@@ -25,7 +25,6 @@ describe("CreateParkinglotComponent", () => {
   });
 
   it("must return an invalid form", () => {
-    const fixture = TestBed.createComponent(CreateParkinglotComponent);
     const app = fixture.componentInstance;
     fixture.detectChanges();
     const plate = app.parkinglotForm.controls["plate"];
@@ -33,7 +32,6 @@ describe("CreateParkinglotComponent", () => {
     expect(app.parkinglotForm.invalid).toBeTrue();
   });
   it("must return a valid form", () => {
-    const fixture = TestBed.createComponent(CreateParkinglotComponent);
     const app = fixture.componentInstance;
     fixture.detectChanges();
     const plate = app.parkinglotForm.controls["plate"];

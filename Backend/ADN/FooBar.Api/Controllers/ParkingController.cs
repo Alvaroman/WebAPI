@@ -2,11 +2,10 @@
 using FooBar.Application.ParkingLot.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
 namespace FooBar.Api.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class ParkingController
     {
         readonly IMediator _mediator = default!;
