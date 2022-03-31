@@ -48,7 +48,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: originsAllowedName,
                       builder =>
                       {
-                          builder.WithOrigins(config.GetSection("AllowedOrigins").Get<string[]>());
+                          builder.WithOrigins(config.GetSection("AllowedOrigins").Get<string[]>()).AllowAnyHeader().AllowAnyMethod();
                       });
 });
 
@@ -57,7 +57,7 @@ Log.Logger = new LoggerConfiguration().Enrich.FromLogContext()
     .CreateLogger();
 
 var app = builder.Build();
-app.UseCors();
+app.UseCors(originsAllowedName);
 
 if (app.Environment.IsDevelopment())
 {
