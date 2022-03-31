@@ -16,8 +16,4 @@
     <ProjectReference Include="..\FooBar.Domain\FooBar.Domain.csproj" />    
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="VehicleType\Commands\" />
-  </ItemGroup>
-
 </Project>

@@ -23,7 +23,6 @@ describe("DashboardComponent", () => {
     expect(component).toBeTruthy();
   });
   it("should be equals to chart object 1", () => {
-    const fixture = TestBed.createComponent(DashboardComponent);
     const app = fixture.componentInstance;
     fixture.detectChanges();
     let thisDay = new Date();
@@ -62,7 +61,6 @@ describe("DashboardComponent", () => {
     expect(app.multi).toEqual(seriesObject);
   });
   it("should be equals to chart object 2", () => {
-    const fixture = TestBed.createComponent(DashboardComponent);
     const app = fixture.componentInstance;
     fixture.detectChanges();
     let thisDay = new Date();
