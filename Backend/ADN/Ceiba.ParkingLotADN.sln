@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ceiba.ParkingLotADN.Infrast
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ceiba.ParkingLotADN.Domain.Tests", "FooBar.Domain.Tests\Ceiba.ParkingLotADN.Domain.Tests.csproj", "{7B6DD752-A275-430F-B34B-F492ED9ACF76}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ceiba.ParkingLotADN.Api.Tests", "FooBar.Api.Tests\Ceiba.ParkingLotADN.Api.Tests.csproj", "{5EA6C39C-7638-4566-A769-AB9268DE7D51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FooBar.Api.Tests", "FooBar.Api.Tests\FooBar.Api.Tests.csproj", "{5EA6C39C-7638-4566-A769-AB9268DE7D51}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FooBar.Application", "FooBar.Application\FooBar.Application.csproj", "{A2B94721-3CD7-467A-A8D2-AC8317073BE5}"
 EndProject
