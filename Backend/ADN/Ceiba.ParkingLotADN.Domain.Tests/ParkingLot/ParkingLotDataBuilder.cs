@@ -2,6 +2,9 @@
 
 namespace Ceiba.ParkingLotADN.Domain.Tests.ParkingLot
 {
+    /// <summary>
+    /// Data buildre for parking lot.
+    /// </summary>
     public class ParkingLotDataBuilder
     {
         int VehicleType = default!;
