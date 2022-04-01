@@ -3,7 +3,7 @@
   <div class="row text-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header"><b>Parking lot history</b></div>
+        <div class="card-header"><strong>Parking lot history</strong></div>
         <div class="card-body">
           <ngx-charts-line-chart
             [view]="viewLine"
@@ -29,13 +29,7 @@
             class="card text-dark bg-Light mb-3"
             style="max-width: 18rem; margin-right: 1rem"
           >
-            <div class="card-header">
-              <b
-                >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Car
-                visits
-                average&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b
-              >
-            </div>
+            <div class="card-header"><strong>Car visits average</strong></div>
             <div class="card-body">
               <h5 class="card-title">Visits per day</h5>
               <h3>
@@ -50,7 +44,7 @@
             style="max-width: 18rem; margin-left: 1rem"
           >
             <div class="card-header">
-              <b>&nbsp;&nbsp;Motorcycle visits average&nbsp;&nbsp;</b>
+              <strong>Motorcycle visits average</strong>
             </div>
             <div class="card-body">
               <h5 class="card-title">Visits per day</h5>
@@ -65,7 +59,9 @@
       </div>
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header"><b>Vehicles at the parking lot</b></div>
+          <div class="card-header">
+            <strong>Vehicles at the parking lot</strong>
+          </div>
           <div class="card-body">
             <ngx-charts-advanced-pie-chart
               [view]="viewPie"

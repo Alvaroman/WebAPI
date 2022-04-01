@@ -3,8 +3,8 @@
   <div class="row">
     <div class="col-md-7">
       <div class="card">
-        <div class="card-header text-center">
-          <b>Vehicles at the parking lot</b>
+        <div class="card-header text-center font-weight-bold">
+          Vehicles at the parking lot
         </div>
         <div class="card-body">
           <div style="overflow-x: auto">
@@ -28,8 +28,22 @@
                     {{ getStartedAtHourPart(vehicle.id) }}-
                     {{ getStartedAtDatePart(vehicle.id) }}
                   </td>
-                  <td><button class="btn btn-secondary" (click)="onCostRequest(vehicle.id)">Get charge</button></td>
-                  <td><button class="btn btn-secondary" (click)="onRelease(vehicle.id)">Release</button></td>
+                  <td>
+                    <button
+                      class="btn btn-secondary"
+                      (click)="onCostRequest(vehicle.id)"
+                    >
+                      Get charge
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-secondary"
+                      (click)="onRelease(vehicle.id)"
+                    >
+                      Release
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -40,8 +54,8 @@
 
     <div class="col-md-5">
       <div class="card">
-        <div class="card-header text-center">
-          <b>Register a new ingress</b>
+        <div class="card-header text-center font-weight-bold">
+          <p class="font-weight-bold">Register a new ingress</p>
         </div>
         <div class="card-body">
           <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
