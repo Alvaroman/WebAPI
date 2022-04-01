@@ -44,7 +44,7 @@ export class CreateParkinglotComponent implements OnInit {
   }
   onSubmit() {
     this.service.create(this.parkinglotForm.value).subscribe(
-      (resp) => {
+      (resp) => { 
         console.log(resp);
         this.toastr.success("Vehicle registered correctly!");
         this.buildParkingLotForm();
