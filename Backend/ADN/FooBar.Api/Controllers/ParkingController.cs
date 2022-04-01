@@ -2,6 +2,7 @@
 using FooBar.Application.ParkingLot.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+
 namespace FooBar.Api.Controllers
 {
     [Route("api/[controller]")]
