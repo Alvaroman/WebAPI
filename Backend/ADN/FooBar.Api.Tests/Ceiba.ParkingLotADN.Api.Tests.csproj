@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FooBar.Domain\FooBar.Domain.csproj" />
-    <ProjectReference Include="..\FooBar.Api\FooBar.Api.csproj" />    
+    <ProjectReference Include="..\FooBar.Api\Ceiba.ParkingLotADN.Api.csproj" />    
   </ItemGroup>
 
 </Project>
