@@ -46,18 +46,17 @@ class IntegrationTestBuilder : WebApplicationFactory<Program>
 
     void SeedDatabase(IServiceProvider services)
     {
-        var People = new List<Person>
+        var People = new List<ParkingLot>
             {
-                new Person
+                new ParkingLot
                 {
-                    Id = _id, Email = "JohnDoe@gmail.com", FirstName = "John",
-                    LastName = "Doe", DateOfBirth = DateTime.Now.AddYears(-20)
+                    VehicleType=1,StartedAt=DateTime.Now,Cylinder=1800, Plate="abc-000",Status=false
                 }
             };
 
         using (var scope = services.CreateScope())
         {
-            var personRepo = scope.ServiceProvider.GetRequiredService<IGenericRepository<Person>>();
+            var personRepo = scope.ServiceProvider.GetRequiredService<IGenericRepository<ParkingLot>>();
             foreach (var person in People)
             {
                 personRepo.AddAsync(person).Wait();
